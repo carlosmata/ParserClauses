@@ -13,10 +13,17 @@ from Clause import Clause
 
 class Parser( object ):
 
-	def __init__(self, definitions):
+	def __init__(self):
+		self.errors = []
 		self._tokens = None
 		self._currenttoken = None
-		self.definitions = definitions
+		self.definitions = [
+							Definition("negativo", "[~]"),
+							Definition("coma", "[,]"),
+							Definition("etiqueta", "[a-zA-Z][a-zA-Z0-9_]*"),
+							Definition("llaveizq", "[{]"),
+							Definition("llaveder", "[}]")
+							]
 		self.definitions.append(Definition("enter", "\\n"))
 		self.definitions.append(Definition("space", " "))
 		self.definitions.append(Definition("tab", "\\t"))
@@ -25,12 +32,12 @@ class Parser( object ):
 	# Show error and out of program
 	def errorparse(self):
 		if self._currenttoken != None:
-			print("Existe un error en la sintaxis: token: " + 
+			self.errors.append("Existe un error en la sintaxis: token: " + 
 					self._currenttoken.getName() + 
 					" valor: " + 
-					self._currenttoken.getValue() )
+					self._currenttoken.getValue())
 		else:
-			print("Existe un error en la sintaxis: incompleta o erronea")
+			self.errors.append("Existe un error en la sintaxis: incompleta o erronea")
 		return None
 
 	# Match the current token with the name sender
@@ -47,20 +54,25 @@ class Parser( object ):
 
 	# Begin the parse
 	def parse( self, text ):
-		self._tokens = self.lexer.obtainTokens( text )
+		del self.errors[:]
+		if(text != None and text != ""):
+			self._tokens = self.lexer.obtainTokens( text )
 
-		if(self._tokens != None):
-		#Aplicamos reglas de gramatica
-			self._currenttoken = self._tokens.pop(0)
-			clauses = self.S([])
+			if(self._tokens != None):
+			#Aplicamos reglas de gramatica
+				self._currenttoken = self._tokens.pop(0)
+				clauses = self.S([])
 
-			if(len(self._tokens) != 0): #No se terminaron los tokens-->error sintactico
-				print("Error en sintaxis, no se consumieron todos los tokens")
-				return []
+				if(len(self._tokens) != 0): #No se terminaron los tokens-->error sintactico
+					self.errors.append("Error en sintaxis, no se consumieron todos los tokens")
+					return []
+				else:
+					return clauses
 			else:
-				return clauses
+				self.errors.append("Existe un error en la entrada, no se reconocen algunos simbolos: Error lexico")
+				return []
 		else:
-			print("Existe un error en la entrada, no se reconocen algunos simbolos: Error lexico")
+			self.errors.append("Entrada vacia")
 			return []
 
 #-----------------------Gramatica------------------------------------------

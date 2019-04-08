@@ -14,7 +14,7 @@ class Proposition(object):
 		self.negative = negative
 
 	# Get the name of the proposition
-	def getName(self, proposition):
+	def getName(self):
 		return self.name
 
 	# Set the negative value of the proposition
@@ -28,3 +28,9 @@ class Proposition(object):
 	# GEt the value of the negative attribute
 	def getNegativeValue(self):
 		return self.negative
+
+	def toString(self):
+		p = ""
+		if(self.negative):
+			p = p + "~"
+		return p + self.name

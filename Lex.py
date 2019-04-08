@@ -13,6 +13,7 @@ class Lex( object ):
 	
 	def __init__(self, definitions):
 		self.rules = definitions
+		self.errors = []
 	
 	# Obtain a list of tokens of text
 	def obtainTokens(self, text ):
@@ -21,7 +22,8 @@ class Lex( object ):
 		ends = len(text)
 		rule = None
 		band = False
-		
+		print(ends)
+
 		#get the tokens at the text 
 		while(band != True):
 			# find the next string
@@ -41,7 +43,7 @@ class Lex( object ):
 				ends = ends - 1
 			
 			if ends == begin: #no se encontro token
-				print("No se encontro definicion para " + substring)
+				self.errors.append("No se encontro definicion para " + substring)
 				band = True
 		
 		if(band == True): # no se encontro definicion
