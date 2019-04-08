@@ -22,7 +22,6 @@ class Lex( object ):
 		ends = len(text)
 		rule = None
 		band = False
-		print(ends)
 
 		#get the tokens at the text 
 		while(band != True):

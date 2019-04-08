@@ -32,10 +32,13 @@ class MainWindow(QtWidgets.QDialog, Ui_Dialog):
 		self.erroresBtn.clicked.connect(self.showErrors)
 
 	def showErrors(self):
-		#self.parser.errors[]
+		errores = ""
+		for error in self.parser.errors:
+			errores = errores + error + "\n"
+		
 		QtWidgets.QMessageBox.about(self, 
 						"Errores", 
-						"Puros errores, escribe bien")
+						errores)
 
 	#Clicked event for demostrarBtn
 	def runProcess(self):
@@ -54,6 +57,7 @@ class MainWindow(QtWidgets.QDialog, Ui_Dialog):
 		
 		if(len(self.parser.errors) > 0):
 			self.erroresBtn.setVisible(True)
+			self.showErrors()
 			self.resultadoLbl.setText("Error en entrada")
 
 		self.setDataTableProgres(data)
@@ -65,7 +69,7 @@ class MainWindow(QtWidgets.QDialog, Ui_Dialog):
 		self.processTable.clearSpans()
 		self.progressBar.setProperty("value", 0)
 		self.resultadoLbl.setText(" Sin Entradas")
-		self.clausulasLbl.setText("S={ }")
+		self.clausulasLbl.setText("   ")
 		self.erroresBtn.setVisible(False)
 		self.iniTable()
 

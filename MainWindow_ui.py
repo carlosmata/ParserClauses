@@ -101,7 +101,7 @@ class Ui_Dialog(object):
         self.borrarBtn.setText(_translate("Dialog", "Borrar"))
         self.demostrarBtn.setText(_translate("Dialog", "Demostrar"))
         self.titulo2Lbl.setText(_translate("Dialog", "Proceso de resolución:"))
-        self.clausulasLbl.setText(_translate("Dialog", "S={ }"))
+        self.clausulasLbl.setText(_translate("Dialog", "    "))
         self.resultadoTitleLbl.setText(_translate("Dialog", "Resultado:"))
         self.resultadoLbl.setText(_translate("Dialog", " Sin entradas"))
         self.erroresBtn.setText(_translate("Dialog", "Ver errores"))
