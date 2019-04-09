@@ -69,10 +69,10 @@ class Parser( object ):
 				else:
 					return clauses
 			else:
-				self.errors.append("Existe un error en la entrada, no se reconocen algunos simbolos: Error lexico")
+				self.errors.append("Existe un error en la entrada, no se reconocen algunos símbolos: Error léxico")
 				return []
 		else:
-			self.errors.append("Entrada vacia")
+			self.errors.append("Entrada vacía")
 			return []
 
 #-----------------------Gramatica------------------------------------------

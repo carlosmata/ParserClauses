@@ -42,7 +42,7 @@ class Lex( object ):
 				ends = ends - 1
 			
 			if ends == begin: #no se encontro token
-				self.errors.append("No se encontro definicion para " + substring)
+				self.errors.append("No se encontró definición para " + substring)
 				band = True
 		
 		if(band == True): # no se encontro definicion

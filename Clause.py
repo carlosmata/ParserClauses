@@ -9,9 +9,9 @@
 
 class Clause(object):
 	
-	def __init__(self):
+	def __init__(self, resultado = "Hipotesis"):
 		self.propositions = []
-		self.resultado = "Hipotesis"
+		self.resultado = resultado
 
 	# Set a new proposition to the clause
 	def addProposition(self, proposition):
