@@ -1,7 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+import os
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
+        scriptDir = os.path.dirname(os.path.realpath(__file__))
+        self.setWindowIcon(QtGui.QIcon(scriptDir + os.path.sep + 'check.ico'))
+
         Dialog.setObjectName("Dialog")
         Dialog.resize(631, 434)
         Dialog.setSizeGripEnabled(False)

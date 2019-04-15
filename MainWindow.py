@@ -1,6 +1,7 @@
 from MainWindow_ui import *
 from TableModel import TableModel
 from Parser import Parser
+from Resolution import Resolution
 import sys
 
 class MainWindow(QtWidgets.QDialog, Ui_Dialog):
@@ -48,12 +49,17 @@ class MainWindow(QtWidgets.QDialog, Ui_Dialog):
 		clauses = self.parser.parse(text)
 		
 		data = []
+		inconsistent = False
 		
 		if(clauses != None):
-			counter = 1
+			#------------TODO apply resolution
+			resolution = Resolution(clauses)
+			inconsistent = resolution.applyResolution()
+			clauses = resolution.getClauses()
+			#-------------------------------------------
+
 			for clause in clauses:
-				data.append((counter, clause.toString(), clause.getResultado()))
-				counter = counter + 1
+				data.append((clause.getId(), clause.toString(), clause.getResultado()))
 		
 		if(len(self.parser.errors) > 0):
 			self.erroresBtn.setVisible(True)
@@ -61,7 +67,6 @@ class MainWindow(QtWidgets.QDialog, Ui_Dialog):
 			self.resultadoLbl.setText("Error en entrada")
 
 		self.setDataTableProgres(data)
-		#self.resultadoLbl.setText("No se encontraron entradas")
 
 	#Clicked event for borrarBtn
 	def clear(self):

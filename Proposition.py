@@ -25,12 +25,27 @@ class Proposition(object):
 	def isNegative(self, negative):
 		return (self.negative == negative)
 
-	# GEt the value of the negative attribute
+	# Get the value of the negative attribute
 	def getNegativeValue(self):
 		return self.negative
 
+	# Convert the proposition in a string
 	def toString(self):
 		p = ""
 		if(self.negative):
 			p = p + "~"
 		return p + self.name
+
+	# Check if the proposition is equals to another proposition
+	def isEqual(self, otherProposition):
+		if(otherProposition.getName() == self.name):
+			if(otherProposition.getNegativeValue() == self.negative):
+				return True
+		return False
+
+	#Check if the proposition is the opposite to another proposition
+	def isOpposite(self, otherProposition):
+		if(otherProposition.getName() == self.name):
+			if(otherProposition.getNegativeValue() != self.getNegativeValue()):
+				return True
+		return False

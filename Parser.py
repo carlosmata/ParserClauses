@@ -16,6 +16,7 @@ class Parser( object ):
 	def __init__(self):
 		self.errors = []
 		self._tokens = None
+		self.idClauses = 1
 		self._currenttoken = None
 		self.definitions = [
 							Definition("negativo", "[~]"),
@@ -60,6 +61,7 @@ class Parser( object ):
 
 			if(self._tokens != None):
 			#Aplicamos reglas de gramatica
+				self.idClauses = 1
 				self._currenttoken = self._tokens.pop(0)
 				clauses = self.S([])
 
@@ -103,6 +105,8 @@ class Parser( object ):
 			clause = Clause()
 			res = self.A(clause)
 			if(res != None and self.match("llaveder") ):
+				clause.setId(self.idClauses)
+				self.idClauses = self.idClauses + 1
 				listClauses.append(clause)
 			return listClauses
 		else:
