@@ -9,10 +9,18 @@
 
 class Clause(object):
 	
-	def __init__(self, id = 0, resultado = "Hipotesis"):
+	def __init__(self, id = 0):
 		self.id = id
 		self.propositions = []
-		self.resultado = resultado
+
+		#test
+		self.parent1 = None
+		self.parent2 = None
+
+	#test
+	def addParents(self, parent1,  parent2):
+		self.parent1 = parent1
+		self.parent2 = parent2
 
 	# Set a new proposition to the clause
 	def addProposition(self, proposition):
@@ -34,13 +42,12 @@ class Clause(object):
 				return p
 		return None
 
-	# Set the value of the member resultado
-	def setResultado(self, resultado):
-		self.resultado = resultado
-
 	# Get the value of the member resultado
 	def getResultado(self):
-		return self.resultado
+		res = "Hipótesis"
+		if (self.parent1 != None and self.parent2 != None):
+			res = "Resolución " + str(self.parent1.getId()) + " y " + str(self.parent2.getId())
+		return res
 
 	# Get the Id of the Clause
 	def getId(self):
@@ -90,17 +97,7 @@ class Clause(object):
 				return True
 		return False
 
-	#Apply the principle of the resolution with one proposition
-	#and return a new clause
-	'''def resolvent(self, proposition):
-		newclause = Clause()
-		for p in self.propositions:
-			print(proposition.toString() + ":" +p.toString())
-			if(not proposition.isOpposite(p)):
-				newclause.addProposition(p)
-		return newclause'''
-
-	def resolvent(self, otherclause, maxid):
+	def resolvent(self, otherclause):
 		resolvents = []
 
 		for p in self.getPropositions():
@@ -114,18 +111,10 @@ class Clause(object):
 					if(p2.getName() != p.getName()):
 						newclause.addProposition(p2)
 
-				newclause.setId(maxid)
-				newclause.setResultado("Resolucion de "+ 
-											str(self.getId()) + 
-											" y " + 
-											str(otherclause.getId()))
+				newclause.addParents(self, otherclause)
 				resolvents.append(newclause)
-				maxid = maxid + 1
 
-		#for otherp in otherclause.getPropositions():
-		#	if(not self.haveOpposite(otherp)):
-		#		newclause.addProposition(otherp)
-		return resolvents, maxid
+		return resolvents
 
 
 

@@ -58,8 +58,16 @@ class MainWindow(QtWidgets.QDialog, Ui_Dialog):
 			clauses = resolution.getClauses()
 			#-------------------------------------------
 
+			iterator = 1
 			for clause in clauses:
+				clause.setId(iterator)
 				data.append((clause.getId(), clause.toString(), clause.getResultado()))
+				iterator = iterator + 1
+
+			if(inconsistent):
+				self.resultadoLbl.setText("Es incosistente")
+			else: 
+				self.resultadoLbl.setText("Es consistente")
 		
 		if(len(self.parser.errors) > 0):
 			self.erroresBtn.setVisible(True)

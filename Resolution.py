@@ -22,12 +22,11 @@ class Resolution( object ):
 		new = []
 		clauses = self.clauses
 		while (True):
-			maxId = self.getMaxId() + 1
 			for i in range(len(clauses)):
 				for j in range(i + 1, len(clauses)):
 					Ci = clauses[i]
 					Cj = clauses[j]
-					resolvents, maxId =  Ci.resolvent(Cj, maxId)
+					resolvents =  Ci.resolvent(Cj)
 					if(self.hasEmptyClass(resolvents)):
 						new = new + resolvents
 						self.addClauses(new)
