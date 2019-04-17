@@ -4,10 +4,10 @@ from Parser import Parser
 from Resolution import Resolution
 import sys
 
-class MainWindow(QtWidgets.QDialog, Ui_Dialog):
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 	def __init__(self, parent=None):
 		self.parser = Parser()
-		QtWidgets.QDialog.__init__(self, parent)
+		QtWidgets.QMainWindow.__init__(self, parent)
 		self.setupUi(self)
 		self.connectEvents()
 		self.iniTable()

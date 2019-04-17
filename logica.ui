@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Demostrador de Formulas</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuArchivo">
+    <property name="title">
+     <string>Archivo</string>
+    </property>
+    <addaction name="actionAbrir_archivo"/>
+    <addaction name="actionCerrar"/>
+   </widget>
+   <widget class="QMenu" name="menuAnalisis">
+    <property name="title">
+     <string>Analisis</string>
+    </property>
+    <addaction name="actionDemostrar"/>
+    <addaction name="actionBorrar"/>
+   </widget>
+   <addaction name="menuArchivo"/>
+   <addaction name="menuAnalisis"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAbrir_archivo">
+   <property name="icon">
+    <iconset>
+     <normaloff>file.ico</normaloff>file.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Abrir archivo...</string>
+   </property>
+  </action>
+  <action name="actionCerrar">
+   <property name="icon">
+    <iconset>
+     <normaloff>close.ico</normaloff>close.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Cerrar</string>
+   </property>
+  </action>
+  <action name="actionDemostrar">
+   <property name="icon">
+    <iconset>
+     <normaloff>resolution.ico</normaloff>resolution.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Demostrar</string>
+   </property>
+  </action>
+  <action name="actionBorrar">
+   <property name="icon">
+    <iconset>
+     <normaloff>erase.ico</normaloff>erase.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Borrar</string>
+   </property>
+  </action>
+  <action name="actionAcerca_de">
+   <property name="text">
+    <string>Acerca de ...</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
