@@ -32,6 +32,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 		self.demostrarBtn.clicked.connect(self.runProcess)
 		self.erroresBtn.clicked.connect(self.showErrors)
 
+		self.actionAbrir_archivo.triggered.connect(self.openFileNameDialog)
+		self.actionCerrar.triggered.connect(self.close)
+		self.actionDemostrar.triggered.connect(self.runProcess)
+		self.actionBorrar.triggered.connect(self.clear)
+
+
+	def close(self):
+		self.close()
+
 	def showErrors(self):
 		errores = ""
 		for error in self.parser.errors:
@@ -85,6 +94,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 		self.clausulasLbl.setText("   ")
 		self.erroresBtn.setVisible(False)
 		self.iniTable()
+
+	#Open a file dialog
+	def openFileNameDialog(self):
+		options = QtWidgets.QFileDialog.Options()
+		options |= QtWidgets.QFileDialog.DontUseNativeDialog
+		fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self,"QtWidgets.QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
+		if fileName:
+			file = open(fileName, 'r')
+			
+			with file:
+				text = file.read()
+				self.clausulasText.setPlainText(text)
+
+			print(fileName)
 
 if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)
