@@ -18,7 +18,7 @@ class Resolution( object ):
 		return self.clauses
 
 	# Apply the principle of the resolution in all pair the clauses
-	def applyResolution(self):
+	'''def applyResolution(self):
 		new = []
 		clauses = self.clauses
 		while (True):
@@ -36,7 +36,47 @@ class Resolution( object ):
 				return False
 			#self.clauses = self.clauses + new
 			self.addClauses(new)
-			new = []
+			new = []'''
+
+	# Apply the principle of the resolution in all pair the clauses
+	def applyResolution(self):
+		response = self.resolutionRecursive(self.clauses)
+		self.addClauses(response[1])
+		return response[0]
+
+	# Resolution recursive 
+	def resolutionRecursive(self, clauses):
+		if(self.hasEmptyClass(clauses)):
+			return [True, []]
+		if(len(clauses) < 2):
+			return [False, []]
+
+		new = []
+		for i in range(len(clauses)):
+			for j in range(i + 1, len(clauses)):
+				Ci = clauses[i]
+				Cj = clauses[j]
+				resolvents = Ci.resolvent(Cj)
+				newList = self.getListWithoutClauses(clauses, Ci,Cj)
+				newclauses = resolvents + newList
+				new = new + resolvents
+
+				response = self.resolutionRecursive(newclauses)
+				
+				if(response[0] == True):
+					new = new + response[1]
+					#new = resolvents + response[1]
+					return [True, new]
+
+		return [False, new]
+
+	#Get a list without the clauses Ci and Cj
+	def getListWithoutClauses(self, clauses, Ci, Cj):
+		newList = []
+		for k in range(len(clauses)):
+			if(clauses[k] != Ci and clauses[k] != Cj):
+				newList.append(clauses[k])
+		return newList
 
 	# Check if the clauses is inconsistent
 	def isInconsistent(self):

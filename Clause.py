@@ -12,10 +12,17 @@ class Clause(object):
 	def __init__(self, id = 0):
 		self.id = id
 		self.propositions = []
+		self.used = False
 
 		#test
 		self.parent1 = None
 		self.parent2 = None
+
+	def hadUsed(self):
+		return self.used
+
+	def setUsed(self, value):
+		self.used = value
 
 	#test
 	def addParents(self, parent1,  parent2):

@@ -18,13 +18,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 		data = []
 		table_model = TableModel(self, data, header)
 		self.processTable.setModel(table_model)
-		self.processTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+		self.processTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
 	def setDataTableProgres(self, data):
 		header = ['Paso', 'Clausula', 'Resultado']
 		table_model = TableModel(self, data, header)
 		self.processTable.setModel(table_model)
-		self.processTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+		self.processTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
 	#Conect the events of the buttons
 	def connectEvents(self):
@@ -101,13 +101,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 		options |= QtWidgets.QFileDialog.DontUseNativeDialog
 		fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self,"QtWidgets.QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
 		if fileName:
+			self.clear()
 			file = open(fileName, 'r')
 			
 			with file:
 				text = file.read()
 				self.clausulasText.setPlainText(text)
 
-			print(fileName)
 
 if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)
